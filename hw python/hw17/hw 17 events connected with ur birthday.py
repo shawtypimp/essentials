@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup as BS
 import requests 
-import json
 
 name_of_month = input("Введите месяц своего рождения: ")
 year = input("Введите год своего рождения: ")
