@@ -2,7 +2,7 @@ import requests
 
 headers ={"X-API-KEY": "6HS5FAD-29KMK7C-GKG2V9H-BVWARJ0"}
 #токен
-def get_movies_by_year( type = 1, year = 2004, sort_field = "rating.imdb", sort_type = 1, select_fields = "rating.imdb, alternativeName", ):
+def get_movies_by_year( type = 1, year = 2004, sort_field = "rating.imdb", sort_type = 1, select_fields = "rating.imdb, names" ):
     #сортирую фильмы по нужным мне параметрам
     response = requests.get(
         'https://api.kinopoisk.dev/v1/movie', 
@@ -16,22 +16,16 @@ def get_movies_by_year( type = 1, year = 2004, sort_field = "rating.imdb", sort_
         headers=headers
     )
     #делаю запрос добавляя в него параметры
-    movies = response.json()
-    return movies["docs"]
+    
+    raw_movies = {}
+    for i in range(len(response.json()['docs'])):
+        raw_movies[response.json()['docs'][i]['names'][0]['name']] = response.json()['docs'][i]['names'][0]['name']
+    return raw_movies
 
-movies = get_movies_by_year()
+raw_movies = get_movies_by_year()
 
-movies1 = str(movies)
-movies1 = movies1.replace("[", "")
-movies1 = movies1.replace("]", "")
-movies1 = movies1.replace("{", "")
-movies1 = movies1.replace("}", "")
-movies1 = movies1.replace(":", "")
-movies1 = movies1.replace("'", "")
-movies1 = movies1.replace("alternativeName", "")
-movies2 = movies1.split(',')
-#убираю все ненужные мне символы, чтобы красиво записать названия в файл
 
 with open(r"C:movies.txt", "w", encoding="utf-8") as file:
-    for name in movies2:
-        file.write( name + '\n')
+    file.write("Лучшие фильмы вышедшие в 2004 году, отсортировынные по рейтингу IMDB: " + '\n')
+    for  key, value in raw_movies.items():
+        file.write( value + '\n')
