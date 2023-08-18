@@ -11,8 +11,7 @@ dp = Dispatcher(bot)
 HELP_COMMAND = """
 <b>/help</b> - <em>список команд</em>
 <b>/start</b> - <em>начать работу с ботом</em>
-<b>/categories</b> - <em>категории фото</em>
-<b>/stop</b> - <em>остановить работу бота</em>   
+<b>/categories</b> - <em>категории фото</em>   
 """
 @dp.message_handler(commands = ['start'])
 async def start_command(message: types.Message):
