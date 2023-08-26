@@ -2,7 +2,11 @@ meta:
   environment: python
   toolchain:
     name: pip
+<<<<<<< HEAD
     version: 3.11.2
+=======
+    version: 3.8
+>>>>>>> 314de62e71e65cacb8379601311589bf07586816
 build:
   requirementsPath: requirements.txt
 run:
