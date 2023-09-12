@@ -1,0 +1,6 @@
+{
+    "sender": "bob",
+    "recipient": "jack",
+    "amount": 10,
+    "hash":""
+}
